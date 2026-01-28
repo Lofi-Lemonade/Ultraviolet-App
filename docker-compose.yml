@@ -1,9 +1,12 @@
 services:
   ultraviolet:
+    ports:
+      - 8080:8080
     build:
       context: .
-      dockerfile: docker/Dockerfile
-      args:
-        - NPM_BUILD=npm ci --omit=dev --frozen-lockfile
-    ports:
-      - "8080:8080"
+    container_name: ultraviolet
+    restart: unless-stopped
+
+networks:
+  default:
+    name: ultraviolet
